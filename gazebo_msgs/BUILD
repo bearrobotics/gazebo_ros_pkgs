@@ -1,6 +1,7 @@
 load(
     "@com_github_mvukov_rules_ros//ros:interfaces.bzl",
     "cc_ros_interface_library",
+    "py_ros_interface_library",
     "ros_interface_library",
 )
 
@@ -26,4 +27,21 @@ cc_ros_interface_library(
         "//visibility:public",
     ],
     deps = [":gazebo_msgs"],
+)
+
+py_ros_interface_library(
+    name = "py_gazebo_msgs",
+    visibility = [
+        "//visibility:public",
+    ],
+    deps = [":gazebo_msgs"]
+)
+py_binary(
+    name = "test",
+    srcs = [
+        "test.py"
+    ],
+    deps = [
+        ":py_gazebo_msgs"
+    ]
 )
